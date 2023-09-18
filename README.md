@@ -29,3 +29,41 @@ Feel free to fork the repository, open issues, and submit pull requests. Your co
 
 ---
 
+## Single-Cell Perturbations Analysis Project
+
+### Introduction
+
+Welcome to our project repository where we unravel the mysteries of single-cell perturbations in the dynamic field of biotechnology and data science. Leveraging a rich dataset from a Kaggle competition focused on open problems in single-cell perturbations, we aim to foster groundbreaking discoveries in cellular responses to small molecule drug perturbations.
+
+### Background
+
+Our project is centered around a novel dataset created using human peripheral blood mononuclear cells (PBMCs). This dataset, derived from a meticulous experiment involving 144 compounds from the LINCS Connectivity Map dataset, offers a rich multi-omic background, providing a fertile ground for establishing biological priors that elucidate the susceptibility of specific genes to perturbation responses in various biological contexts.
+
+### Objective
+
+The primary goal of this endeavor is to develop predictive models capable of accurately forecasting cellular responses to small molecule drug perturbations. Our objectives are multi-faceted, encompassing:
+
+1. **Data Exploration and Understanding**: Through comprehensive EDA, we aim to unearth underlying patterns and grasp the biological context of the data.
+2. **Model Development**: Utilizing unsupervised learning techniques, primarily focusing on matrix factorization methods, we aspire to build predictive models and juxtapose them against supervised learning models to discern the strengths and weaknesses of each approach.
+3. **Performance Evaluation**: This involves rigorous testing of the models to gauge their predictive accuracy and robustness.
+4. **Improvement and Optimization**: We are committed to continually refining our models, overcoming limitations, and enhancing their predictive accuracy.
+
+### Significance
+
+This project stands as a beacon in the confluence of data science and biotechnology, striving to spearhead advancements in medicine through predictive analysis of cellular responses to drug perturbations. It promises not only a substantial learning curve for participants but also a potential pathway to revolutionary discoveries in the medical field.
+
+### Structure
+
+Our project is structured into two pivotal phases:
+
+1. **Exploration and Understanding**: A deep dive into the dataset to understand the biological context and uncover underlying patterns through detailed EDA.
+2. **Model Development and Evaluation**: This phase is dedicated to the development of predictive models using unsupervised learning techniques, followed by a rigorous evaluation to ascertain their performance and potential areas for improvement.
+
+### Getting Started
+
+To get started with the project, navigate through the repository to find detailed documentation on each phase of the project, including the methodologies employed, the results obtained, and the conclusions derived from the analysis.
+
+We invite collaborators and enthusiasts to join us in this analytical journey to unlock the potential of unsupervised learning in the realm of single-cell perturbations analysis. Feel free to contribute, suggest improvements, and raise issues as we collectively work towards a deeper understanding of cellular responses to drug perturbations.
+
+---
+
