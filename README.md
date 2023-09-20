@@ -55,8 +55,7 @@ The heart of our analysis can be bifurcated into two critical pathways:
 #### **Future Prospects**
 This project opens avenues for further research and development in the field of text classification, beckoning contributions that can aid in the crafting of educational strategies and fostering informed decision-making through data-driven insights derived from the analysis of news articles.
 
-#### Link
-[ENEM 2022 Project](Link_to_your_GitHub_repository)
+Link: [BBC News Classification Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/BBC%20News%20Classification%20Kaggle.ipynb)
 
 ---
 
