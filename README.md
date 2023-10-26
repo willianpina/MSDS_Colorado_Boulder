@@ -136,3 +136,47 @@ Link: [Histopathologic Cancer Detection](https://github.com/willianpina/MSDS_Col
 
 ---
 
+### 5. Disaster Tweet Classification Project
+
+#### Introduction
+
+Welcome to the Disaster Tweet Classification Project repository. This project aims to make a significant impact in the field of Natural Language Processing by tackling the problem of classifying tweets related to real-world disasters. The data for this initiative is derived from a Kaggle competition and serves as an excellent starting point for those interested in NLP.
+
+#### Background
+
+This project revolves around a dataset comprising 7,613 training tweets and 3,263 test tweets. These tweets are annotated with various features like ID, text content, geographical location, and keyword. The main objective is to classify whether a tweet is related to a real disaster or not.
+
+#### Objective
+
+The primary goal of this project is to:
+- Conduct extensive Exploratory Data Analysis (EDA) to understand the underlying patterns and contexts within the tweets.
+- Develop machine learning models, focusing on NLP techniques, to classify tweets effectively.
+- Evaluate the performance rigorously based on the F1 score, which is the evaluation metric for the Kaggle competition.
+- Continuously refine and optimize the model through techniques like hyperparameter tuning.
+
+#### Significance
+
+The significance of this project lies at the intersection of Natural Language Processing and crisis management. It aims to automate the process of identifying urgent tweets, thus potentially aiding disaster relief organizations and news agencies.
+
+#### Structure
+
+Our project is structured into two primary phases:
+1. **Exploration and Understanding**: In-depth analysis and understanding of the dataset, its features, and the challenge it poses.
+2. **Model Development and Evaluation**: This phase is dedicated to the construction, training, and evaluation of machine learning models suited for this particular NLP challenge.
+
+#### Getting Started
+
+To dive into this project, navigate through the repository to find comprehensive documentation on each phase, including methodologies, results, and conclusions.
+
+#### Contributing
+
+We invite contributors and enthusiasts to join us in this analytical journey. Feel free to contribute, suggest improvements, and raise issues as we collaboratively work towards a more effective disaster tweet classification system.
+
+
+Link: [Disaster Tweet Classification Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/CNN_Cancer_Detection_Project.ipynb)
+
+
+
+---
+
+
