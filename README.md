@@ -98,7 +98,7 @@ We invite collaborators and enthusiasts to join us in this analytical journey to
 Link: [Open Problems Single Cell Perturbations](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/OPEN%20PROBLEMS%20SINGLE%20CELL%20PERTURBATIONS%20_MSDS.ipynb)
 
 ---
-### Histopathologic Cancer Detection Project
+### 4. Histopathologic Cancer Detection Project
 #### Introduction
 Welcome to our project repository, where we delve into the realm of histopathologic cancer detection. Leveraging a comprehensive dataset from a Kaggle competition, we aim to make significant strides in the field of digital pathology and machine learning. 
 
