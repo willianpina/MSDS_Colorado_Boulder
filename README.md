@@ -173,7 +173,7 @@ To dive into this project, navigate through the repository to find comprehensive
 We invite contributors and enthusiasts to join us in this analytical journey. Feel free to contribute, suggest improvements, and raise issues as we collaboratively work towards a more effective disaster tweet classification system.
 
 
-Link: [Disaster Tweet Classification Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/CNN_Cancer_Detection_Project.ipynb)
+Link: [Disaster Tweet Classification Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/NLP%20Disaster%20Tweets%20Kaggle%20Mini-Project/NLP_Disaster_Tweets_Kaggle_Mini_Project.ipynb)
 
 
 
