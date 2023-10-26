@@ -131,7 +131,7 @@ To get involved with the project, navigate through the repository to find in-dep
 
 We invite enthusiasts and collaborators to join us in this analytical journey to unlock the potential of machine learning in the field of histopathologic cancer detection. Feel free to contribute, suggest improvements, and raise issues as we collaboratively work towards more effective and efficient cancer detection solutions.
 
-Link: [Histopathologic Cancer Detection](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/OPEN%20PROBLEMS%20SINGLE%20CELL%20PERTURBATIONS%20_MSDS.ipynb)
+Link: [Histopathologic Cancer Detection](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/CNN_Cancer_Detection_Project.ipynb)
 
 
 ---
