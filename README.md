@@ -98,3 +98,41 @@ We invite collaborators and enthusiasts to join us in this analytical journey to
 Link: [Open Problems Single Cell Perturbations](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/OPEN%20PROBLEMS%20SINGLE%20CELL%20PERTURBATIONS%20_MSDS.ipynb)
 
 ---
+### Histopathologic Cancer Detection Project
+#### Introduction
+Welcome to our project repository, where we delve into the realm of histopathologic cancer detection. Leveraging a comprehensive dataset from a Kaggle competition, we aim to make significant strides in the field of digital pathology and machine learning. 
+
+#### Background
+Our project revolves around a dataset modified from the PatchCamelyon (PCam) benchmark dataset. This dataset consists of small patches of images taken from larger digital pathology scans. The data includes 220,025 training images and 57,458 test images, focusing on a 32x32 pixel region for binary classification - identifying metastatic cancer.
+
+#### Objective
+The primary goal of this initiative is to develop machine learning algorithms capable of identifying metastatic cancer in small patches of images. Our objectives include:
+
+- **Data Exploration and Understanding**: Through thorough EDA, we intend to discover underlying patterns and understand the medical context of the data.
+  
+- **Model Development**: We are focusing on developing various machine learning models, including CNN, VGG-16, ResNet50, and InceptionV3, to evaluate their strengths and weaknesses in tackling this particular problem.
+  
+- **Performance Evaluation**: Rigorous testing of the models based on the area under the ROC curve, the evaluation metric for the Kaggle competition.
+  
+- **Improvement and Optimization**: We are committed to refining our models through hyperparameter tuning, data augmentation, and potentially ensemble methods to enhance their performance.
+
+#### Significance
+This project serves as an intersection between machine learning and digital pathology, aiming to advance medical diagnoses through the predictive analysis of pathology scans. It offers a steep learning curve for participants and opens doors for innovative solutions in cancer detection.
+
+#### Structure
+Our project is structured into two primary phases:
+
+- **Exploration and Understanding**: A comprehensive analysis of the dataset to understand its medical relevance and discover underlying patterns.
+  
+- **Model Development and Evaluation**: This phase is dedicated to the construction and rigorous evaluation of machine learning models tailored to the specific challenges posed by histopathologic cancer detection.
+
+#### Getting Started
+To get involved with the project, navigate through the repository to find in-depth documentation on each phase, including methodologies, results, and conclusions.
+
+We invite enthusiasts and collaborators to join us in this analytical journey to unlock the potential of machine learning in the field of histopathologic cancer detection. Feel free to contribute, suggest improvements, and raise issues as we collaboratively work towards more effective and efficient cancer detection solutions.
+
+Link: [Histopathologic Cancer Detection](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/OPEN%20PROBLEMS%20SINGLE%20CELL%20PERTURBATIONS%20_MSDS.ipynb)
+
+
+---
+
