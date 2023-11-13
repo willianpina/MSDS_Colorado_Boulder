@@ -176,9 +176,6 @@ We invite contributors and enthusiasts to join us in this analytical journey. Fe
 Link: [Disaster Tweet Classification Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/NLP%20Disaster%20Tweets%20Kaggle%20Mini-Project/NLP_Disaster_Tweets_Kaggle_Mini_Project.ipynb)
 
 ---
-Absolutely, I'll adapt the structure of the Disaster Tweet Classification Project to enhance the description of your GANs project focused on generating Monet-style images. Here's a refined version:
-
----
 
 ### 6. Monet-Style Image Generation with GANs
 
