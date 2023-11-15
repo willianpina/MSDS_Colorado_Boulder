@@ -1,0 +1,18 @@
+{
+    "image": "nvcr.io/nvidia/tensorflow:23.10-tf2-py3",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "mads-hartmann.bash-ide-vscode",
+          "ms-python.python"
+        ]
+      }
+    },
+    "features": {
+      "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    "remoteUser": "root",
+    "updateContentCommand": "sudo apt update && sudo apt install -y libcudnn8 libcufft-dev libblas-dev libtrt-dev bash-completion && pip install --upgrade pip",
+    "runArgs": ["--gpus", "all"]
+  }
+  
