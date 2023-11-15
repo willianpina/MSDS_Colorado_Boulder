@@ -239,7 +239,7 @@ You will find detailed documentation on model architecture, training procedures,
 We invite enthusiasts, artists, and data scientists to contribute with insights, improvements, and discussions. Your contributions are valuable as we explore the limits of what's possible in the fusion of technology and environmental conservation.
 
 #### Project Link
-Link: Invasive Species Detection with Computer Vision Techniques
+Link: [Invasive Species Detection with Computer Vision Techniques](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/Invasive%20Species%20Monitoring/Invasive-Species-Monitoring-Project.ipynb)
 
 
 ---
