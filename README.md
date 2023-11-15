@@ -211,4 +211,36 @@ Link: [Monet-Style Image Generation with GANs](https://github.com/willianpina/MS
 
 ---
 
+### 7. Invasive Species Detection with Computer Vision Techniques
+
+#### Introduction
+Welcome to the Invasive Species Detection Project using Computer Vision Techniques. This project aims to apply the latest technologies in computer vision and machine learning to address significant ecological challenges, specifically the monitoring of invasive species such as the invasive hydrangea.
+
+#### Background
+The presence of invasive species like kudzu in Georgia and cane toads in over a dozen countries poses a substantial threat to the environment. Effective tracking of these species is essential, yet current methods are costly and inefficient due to the vast area that needs to be covered.
+
+#### Objective
+The main goal of this project is to develop computer vision algorithms that can accurately identify the presence of invasive species in images of forests and foliage, making monitoring more affordable and reliable.
+
+#### Significance
+This project highlights the potential of computer vision in contributing to ecological problem solutions, demonstrating how algorithms can assist in environmental conservation initiatives.
+
+#### Structure
+The project is divided into several key phases:
+
+- **Data Preparation**: Processing of relevant image datasets.
+- **Model Development**: Using machine learning techniques to train models capable of identifying invasive species.
+- **Evaluation and Refinement**: Rigorous model evaluation using the AUC-ROC metric and continuous refinement for better performance.
+
+#### Getting Started
+You will find detailed documentation on model architecture, training procedures, and evaluation methods in our repository. We provide resources and guidance at every step of the way.
+
+#### Contributing
+We invite enthusiasts, artists, and data scientists to contribute with insights, improvements, and discussions. Your contributions are valuable as we explore the limits of what's possible in the fusion of technology and environmental conservation.
+
+#### Project Link
+Link: Invasive Species Detection with Computer Vision Techniques
+
+
+---
 
