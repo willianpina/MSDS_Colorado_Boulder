@@ -27,7 +27,7 @@ We welcome data enthusiasts, educational researchers, and policy makers to colla
 #### **Contribution**
 Feel free to fork the repository, open issues, and submit pull requests. Your contributions will be duly acknowledged, and we look forward to building a rich repository of analyses and insights centered around the ENEM 2022 dataset.
 
-Link: [ENEM 2022 Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/ENEM_2022_Project.ipynb)
+Link: [ENEM 2022 Project](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/ENEM%202022%20-%20Project/ENEM_2022_Project.ipynb)
 
 ---
 
