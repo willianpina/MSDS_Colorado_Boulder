@@ -272,9 +272,7 @@ This project provides a foundation for future research in public safety and crim
 For more information and access to the dataset, visit the dataset link: [NYPD Shooting Incident Data (Historic)](https://catalog.data.gov/dataset/nypd-shooting-incident-data-historic).
 
 #### Project Link
-Link: [New York City Shooting Incident Data Analysis](https://github.com/willianpina/MSDS_Colorado_Boulder/blob/main/Invasive%20Species%20Monitoring/Invasive-%20Species-Monitoring-Project.ipynb)
+Link: [New York City Shooting Incident Data Analysis](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/NYPD%20Shotting%20Incidents%20Project).
 
 ---
-
-Make sure to replace "URL-to-the-dataset" with the actual link to access the dataset. This will make it easier for users to obtain the necessary information to follow or contribute to the project.
 
