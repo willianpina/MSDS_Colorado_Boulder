@@ -244,7 +244,7 @@ Link: [Invasive Species Detection with Computer Vision Techniques](https://githu
 
 ---
 
-### 7. New York City Shooting Incident Data Analysis
+### 8. New York City Shooting Incident Data Analysis
 
 #### Introduction
 This project conducts a detailed descriptive analysis of the New York City Shooting Incident dataset. We use analytical methods to extract insights and identify patterns in the shooting records. The goal is to present the findings during the third week of the Master's in Data Science course at the University of Colorado Boulder.
