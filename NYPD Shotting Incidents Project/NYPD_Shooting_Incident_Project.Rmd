@@ -1,0 +1,303 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Import libraries
+library(tidyverse)
+library(plotly)
+library(ggmap)
+library(ggplot2)
+
+```
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Seal_of_New_York.svg/175px-Seal_of_New_York.svg.png" alt="Selo de Nova York">
+</p>
+
+# **New York City Shooting Incident Data Analysis**
+*Author*: Willian Pina
+
+
+## **About the DataSet and Project**
+
+This dataset encompasses a comprehensive collection of all shooting incidents that have occurred in New York City from 2006 to the end of the last calendar year. It is updated quarterly and reviewed by the NYPD's Office of Management Analysis and Planning before being made available to the public. Each record includes details about the incident such as the date, time, location, and demographic information about suspects and victims. This dataset serves as a valuable tool for analyzing the nature of criminal and shooting activity in NYC.
+
+This project is part of the Master's program in Data Science at the University of Colorado Boulder, taught by Professor Dr. Jane Wall, within the course "Data Science as a Field".
+
+### **Dataset Description**
+
+| Column                      | Description                                                                                             |
+|-----------------------------|---------------------------------------------------------------------------------------------------------|
+| INCIDENT_KEY                | Randomly generated persistent ID for each incident                                                      |
+| OCCUR_DATE                  | Exact date of the shooting incident                                                                     |
+| OCCUR_TIME                  | Exact time of the shooting incident                                                                     |
+| BORO                        | Borough where the incident occurred                                                                     |
+| LOC_OF_OCCUR_DESC           | Description of the incident location                                                                    |
+| PRECINCT                    | Precinct where the incident occurred                                                                    |
+| JURISDICTION_CODE           | Jurisdiction code where the incident occurred                                                           |
+| LOC_CLASSFCTN_DESC          | Description of the location classification                                                              |
+| LOCATION_DESC               | Description of the incident location                                                                    |
+| STATISTICAL_MURDER_FLAG     | Indicates whether the shooting resulted in a victim's death, counted as a murder                        |
+| PERP_AGE_GROUP              | Age category of the perpetrator                                                                         |
+| PERP_SEX                    | Sex of the perpetrator                                                                                  |
+| PERP_RACE                   | Race of the perpetrator                                                                                 |
+| VIC_AGE_GROUP               | Age category of the victim                                                                              |
+| VIC_SEX                     | Sex of the victim                                                                                       |
+| VIC_RACE                    | Race of the victim                                                                                      |
+| X_COORD_CD                  | Midblock X-coordinate for the New York State Plane Coordinate System                                    |
+| Y_COORD_CD                  | Midblock Y-coordinate for the New York State Plane Coordinate System                                    |
+| Latitude                    | Latitude coordinate for the global coordinate system                                                    |
+| Longitude                   | Longitude coordinate for the global coordinate system                                                   |
+| Lon_Lat                     | Longitude and latitude coordinates for mapping                                                          |
+
+For more information and access to the data, visit the dataset link: [NYPD Shooting Incident Data (Historic)](https://catalog.data.gov/dataset/nypd-shooting-incident-data-historic).
+
+### **Import data**
+
+We will import the data from the URL provided in the dataset source to begin our data analysis process of the dataset.
+
+```{r import_data, message=FALSE}
+
+
+URL = "https://data.cityofnewyork.us/api/views/833y-fsy8/rows.csv?accessType=DOWNLOAD"
+
+data = read.csv(URL)
+head(data)
+```
+
+### **Clean and tidy data**
+
+Let's start by analyzing and preparing data from the NYPD Shooting Incident Dataset.
+
+Let's follow these steps:
+
+1. Load the data
+2. Perform initial cleaning, such as converting data types and removing unnecessary columns
+3. Check for missing data.
+
+Based on this initial analysis, we can decide how to handle any missing values.
+
+```{r clean_tidy_transform, message=FALSE}
+
+# Summary data
+summary(data)
+
+# Converting date and time.
+data$OCCUR_DATE = mdy(data$OCCUR_DATE)
+data$OCCUR_TIME = hms(data$OCCUR_TIME)
+
+
+# Converting variables to factor and logical types.
+data$BORO = as.factor(data$BORO)
+data$PERP_SEX = as.factor(data$PERP_SEX)
+data$PERP_RACE = as.factor(data$PERP_RACE)
+data$VIC_SEX = as.factor(data$VIC_SEX)
+data$VIC_RACE = as.factor(data$VIC_RACE)
+data$STATISTICAL_MURDER_FLAG = as.logical(data$STATISTICAL_MURDER_FLAG)
+
+# Removing unnecessary columns
+data_clean <- data %>%
+  filter(complete.cases(data)) %>%
+  select(-c(X_COORD_CD, Y_COORD_CD, Lon_Lat)) %>%
+  filter(VIC_AGE_GROUP != "1022", !is.na(VIC_AGE_GROUP))
+
+
+```
+
+As observed, the columns *Latitude*, *Longitude*, and *JURISDICTION_CODE* contained a small amount of missing data. Given the relatively minor proportion of these missing entries compared to the overall dataset size, we have decided to permanently remove these rows from the dataset.
+
+Following these modifications, we will proceed to verify the absence of any remaining missing data and confirm the successful exclusion of the specified columns from the dataset.
+
+```{r check_transformation, message=FALSE}
+
+# Summary data clean
+summary(data_clean)
+```
+### **Visualizations and Analysis**
+
+From now on we will do some visualizations to test some hypotheses and extract some insights.
+
+```{r api_keys, message=FALSE, echo=FALSE}
+register_stadiamaps(key = "fd393099-44ec-4e4b-a211-b0c2a5ffdd82")
+
+```
+Our dataset contains georeferenced information about criminal incidents in the state of New York, including the age of the victims. We can use this data to plot the locations of these incidents on a map and segment them by the victims' age groups. This analysis will allow us to identify if there are specific areas in the state where certain age profiles of victims are more frequently associated with criminal incidents. Thus, we can visually explore the geographic distribution of incidents and investigate potential patterns related to the age of the victims.
+
+```{r visualizations, message=FALSE}
+
+# Get a basemap
+map_data <- get_stadiamap(bbox = c(left = min(data_clean$Longitude) + 0.01, bottom = min(data_clean$Latitude) +  0.01, right = max(data_clean$Longitude) + 0.01, top = max(data_clean$Latitude)+  0.01), maptype = "stamen_toner_lite")
+
+
+# Create the chart
+gg <- ggmap(map_data) +
+  geom_point(data = data_clean, aes(x = Longitude, y = Latitude, color = VIC_AGE_GROUP), alpha = 0.5, size = 3) +
+  scale_color_manual(values = c("18-24" = "blue", "25-44" = "red", "45-64" = "green", "65+" = "yellow", "<18" = "purple", "UNKNOWN" = "grey"),
+                     name = "Age Range") +
+  labs(title = "Map of Shooting Incidents by Victim Age Category",
+       subtitle = "NYPD Shooting Incident Data",
+       caption = "Source: NYPD Shooting Incident Data") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size = 12),
+        axis.title = element_blank(), 
+        axis.text = element_blank(),  
+        axis.ticks = element_blank())
+
+# Show the graph
+print(gg)
+```
+
+Based on the analysis of the image, it is observed that there is no specific location with a predominance of crimes according to the demographic profile. However, there is a significant trend of crimes involving victims aged 25 to 44 years, indicated by the predominant red color.
+
+Additionally, it is noted that the island to the west in the state of New York shows few incidents. This region, primarily characterized as a park area, naturally has less foot traffic, which may explain the low incidence of reported crimes there.
+
+To confirm the initial observation that the majority of the victims belong to the age group of 25 to 45 years, a more detailed analysis of the data will be conducted.
+
+
+```{r graph_Number_shooting_by_age, message=FALSE}
+
+# Group data by victim's age category and count events
+age_data <- data_clean %>%
+  group_by(VIC_AGE_GROUP) %>%
+  summarise(Count = n(), .groups = 'drop')
+
+# Create the bar chart
+gg <- ggplot(age_data, aes(x = VIC_AGE_GROUP, y = Count, fill = VIC_AGE_GROUP)) +
+  geom_bar(stat = "identity", color = "black") +
+  labs(title = "Number of Shooting Incidents by Victim Age Category",
+       x = "Victim Age Category",
+       y = "Number of Incidents",
+       fill = "Age Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))   
+
+# Plot the graph
+print(gg)
+
+```
+
+The analysis of the data reveals that individuals aged 25 to 44 are the most affected, followed by young people between 18 and 24 years old.
+
+To analyze whether there are significant differences between the genders of criminals in terms of criminal activity over time, we can construct a line graph that presents the monthly aggregation of incidents.
+
+This graph will allow us to observe trends and discrepancies between male and female categories over the months. Visualizing these trends can provide valuable insights into the patterns of criminal behavior associated with each gender.
+
+
+```{r graph_timeline_by_sex_perpetrator, message=FALSE}
+
+# Filter only entries where the gender of the perpetrator is known
+data_clean <- data %>%
+  filter(PERP_SEX %in% c("M", "F"))
+
+# Reorder the factors so that M is above F in the legend
+data_clean$PERP_SEX <- factor(data_clean$PERP_SEX, levels = c("M", "F"))
+
+# Group data by month/year and gender of perpetrator
+timeline_data <- data_clean %>%
+  group_by(Month = floor_date(OCCUR_DATE, "month"), PERP_SEX) %>%
+  summarise(Count = n(), .groups = 'drop')
+
+# Create the line chart
+gg <- ggplot(timeline_data, aes(x = Month, y = Count, color = PERP_SEX, group = PERP_SEX)) +
+  geom_line() +
+  labs(title = "Monthly Timeline of Shooting Incidents by Perpetrator's Sex",
+       x = "Date",
+       y = "Number of Incidents",
+       color = "Perpetrator's Sex") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Show the graph
+print(gg)
+
+```
+
+We verified that in the space-time considered, we observed some interesting points:
+
+1. There is a predominance of males as perpetrators of this type of crime.
+2. The presence of higher peaks in the data may indicate seasonality in the incidents.
+3. Between the years 2015 and 2020, there was a decrease in the number of incidents, followed by a phase of stability.
+4. Since 2005, there has been a trend of declining incidents.
+5. Incidents attributed to females have remained at a stable level over the years, with slight variations.
+
+Our dataset includes the `OCCUR_TIME` column, which records the exact time of each incident. Using this information, we can analyze and identify the time periods during which incidents are most frequent in the state of New York.
+
+This analysis will allow us to better understand the temporal patterns of the incidents and potentially direct prevention and response measures more effectively.
+
+
+```{r radial_graph_by_day, message=FALSE}
+
+# data_clean$OCCUR_TIME <- hms(data_clean$OCCUR_TIME)
+data_clean$Hour <- hour(data_clean$OCCUR_TIME)
+
+# Ensure that all times are represented even if there are no incidents
+full_hours <- data.frame(Hour = 0:23)
+hourly_data <- full_hours %>%
+  left_join(data_clean %>% group_by(Hour) %>% summarise(Incidents = n(), .groups = 'drop'), by = "Hour") %>%
+  replace_na(list(Incidents = 0))
+
+# Generate labels for hours
+hourly_data$HourLabel <- sprintf("%02d:00", hourly_data$Hour)
+
+# Create the radial graph
+fig <- plot_ly(
+  data = hourly_data,
+  type = 'scatterpolar',
+  mode = 'lines+markers',
+  r = hourly_data$Incidents,
+  theta = hourly_data$HourLabel,
+  fill = 'toself',
+  line = list(color = 'blue')
+) %>%
+  layout(
+    polar = list(
+      radialaxis = list(
+        visible = T,
+        range = c(0, max(hourly_data$Incidents) + 10)
+      ),
+      angularaxis = list(
+        direction = "clockwise",  # Set to clockwise
+        rotation = 90,  
+        type = 'category',
+        showline = FALSE,
+        tickmode = 'array',
+        tickvals = hourly_data$Hour,
+        ticktext = hourly_data$HourLabel
+      )
+    ),
+    title = "Number of Incidents during the Day",
+    margin = list(t = 100)  
+  )
+
+# Show the graph
+fig
+```
+
+The analysis of the radial graph showing the frequency of occurrences by hour reveals that the period between 21:00 and 23:00 has the highest incidence of incidents. Conversely, the hours between 05:00 and 13:00 show a significant reduction in the number of events.
+
+Interestingly, there is an escalation in occurrences starting at 18:00, which suggests an increase in the likelihood of incidents during this time. This can be attributed to people's behavior as they are either returning home or going out for evening activities after the end of the workday, thus increasing their exposure to potential incidents.
+
+### **Conclusions**
+
+Exploring the dataset on shooting incidents in New York, we identify it as a valuable tool for society to assist the government in shaping security policies. This set includes variables such as race, gender, and location (neighborhood), which could be thoroughly analyzed to understand the dynamics of security across different regions. A pertinent question would be to investigate whether more affluent neighborhoods record crimes at the same proportion as other less privileged areas. This could inspire specific policies to balance this distribution.
+
+Moreover, analyzing gender and race in the incidents could open a dialogue about potential **biases** in these categories, but it is crucial to maintain a clear focus to avoid deviations from the initial objective of the analysis. Variables of social class add another layer of complexity and should be approached with a defined purpose to prevent divergent debates.
+
+An interesting point noted was the predominance of shootings during nighttime, raising hypotheses that they might be motivated by the absence of police forces on patrols. However, considering that the New York Police Department is known to be well-equipped and trained, such a factor may be less influential than initially presumed.
+
+It is also important to highlight that the dataset is reviewed by the Office of Management Analysis and Planning, which can influence how data is presented. This review can either intensify or soften certain aspects of the data, potentially creating an analytical bias that favors interpretations aligned with political interests, especially in a context where one political party has dominated for years.
+
+These considerations underline the need for careful and objective analysis, always seeking clarity in objectives so that conclusions are based on robust evidence and not on premises influenced by potential political or social **biases**.
+
+
+
+
+
+
+
