@@ -244,3 +244,35 @@ Link: [Invasive Species Detection with Computer Vision Techniques](https://githu
 
 ---
 
+### 8. New York City Shooting Incident Data Analysis
+
+#### Introduction
+This project conducts a detailed descriptive analysis of the New York City Shooting Incident dataset. We use analytical methods to extract insights and identify patterns in the shooting records. The goal is to present the findings during the third week of the Master's in Data Science course at the University of Colorado Boulder.
+
+#### Repository Structure
+The repository is divided into specific sections to ensure a comprehensive understanding of the analysis process:
+
+- **About the Dataset and Project**: Detailed description of the origin and structure of the dataset, including information on how it is updated and maintained.
+- **Dataset Description**: Exploration of the metadata to provide a clear summary of each column, helping to understand the variables available for analysis.
+- **Importing, Cleaning, and Organizing**: Processes of data importation, handling missing values, adjusting data types, and removing irrelevant columns for analysis.
+- **Visualizations and Analysis**: Data aggregation and creation of visualizations to answer preliminary project questions. Includes georeferenced and temporal analyses of the incidents.
+
+#### Contribution and Collaboration
+We encourage the participation of data scientists, criminologists, and policy makers to enrich this project. Contributions can be made by forking the repository, opening issues, and submitting pull requests. We value all contributions and are excited to collaborate on developing a robust analytical tool.
+
+#### Objectives
+The project focuses on two main objectives:
+
+- **Pattern Discovery**: Identification of patterns and relationships in the data that may guide crime prevention strategies.
+- **Considerations for Predictive Modeling**: Although we have not developed a predictive model, we identified the presence of the STATISTICAL_MURDER_FLAG variable, which could be used as a response variable in future predictive analyses.
+
+#### Future Prospects
+This project provides a foundation for future research in public safety and criminal analysis. We look forward to subsequent advancements that can refine predictive modeling techniques, contributing to urban safety through well-informed policies and strategic planning.
+
+For more information and access to the dataset, visit the dataset link: [NYPD Shooting Incident Data (Historic)](https://catalog.data.gov/dataset/nypd-shooting-incident-data-historic).
+
+#### Project Link
+Link: [New York City Shooting Incident Data Analysis](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/NYPD%20Shotting%20Incidents%20Project).
+
+---
+
