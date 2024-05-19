@@ -278,5 +278,59 @@ Link: [New York City Shooting Incident Data Analysis](https://github.com/willian
 
 ### 9. Analysis of the Impacts of COVID-19 on Global Populations
 
+#### Introduction
+This academic project conducts an in-depth analysis of COVID-19 data, focusing on daily records of confirmed cases and virus-related deaths. The data, collected and consolidated from various global sources, are crucial for understanding the pandemic's impact, particularly in countries with populations larger than Brazil. This project is part of the Master's in Data Science program at the University of Colorado Boulder and aims to present findings in the third week of the course.
+
+#### Repository Structure
+The repository is organized into specific sections to facilitate a comprehensive understanding of the analysis process:
+
+- **About the Dataset and Project**: Detailed description of the dataset's origin and structure, including information on updates and maintenance.
+- **Dataset Description**: Exploration of the metadata to provide a clear summary of each column, aiding in understanding the variables available for analysis.
+- **Importing, Cleaning, and Organizing**: Processes of data importation, handling missing values, adjusting data types, and removing irrelevant columns for analysis.
+- **Visualizations and Analysis**: Data aggregation and creation of visualizations to answer preliminary project questions, including georeferenced and temporal analyses of the incidents.
+
+#### Contribution and Collaboration
+We encourage participation from data scientists, epidemiologists, and policy makers to enrich this project. Contributions can be made by forking the repository, opening issues, and submitting pull requests. We value all contributions and are excited to collaborate on developing a robust analytical tool.
+
+#### Objectives
+The project focuses on two main objectives:
+
+- **Pattern Discovery**: Identification of patterns and relationships in the data that may guide public health strategies.
+- **Considerations for Predictive Modeling**: While a predictive model has not been developed yet, the analysis could provide insights for future modeling efforts.
+
+#### Future Prospects
+This project lays the groundwork for future research in public health and epidemiology. We look forward to subsequent advancements that can refine predictive modeling techniques, contributing to global health safety through well-informed policies and strategic planning.
+
+#### Data Description
+The datasets used in this study include several key variables, such as:
+
+- **Countries**: The name of the country.
+- **Lat** and **Long**: Geographic coordinates for each location.
+- **Date**: The date of the recorded data.
+- **Cases**: Number of confirmed cases.
+- **Deaths**: Number of confirmed deaths.
+
+#### Data Sources
+The data for this study were extracted from the following sources:
+
+- Daily data on confirmed cases and deaths: Various global repositories.
+- Country population reference: Relevant global datasets.
+
+#### Methodology
+This project employs a structured methodology to analyze COVID-19 data, focusing on the following steps:
+
+- **Sample**: Selection of countries with populations larger than Brazil to ensure a representative demographic scale.
+- **Explore**: Examination of data through visualizations and descriptive statistics to identify trends and anomalies.
+- **Modify**: Data wrangling to standardize datasets for accurate analysis, including handling missing values and data inconsistencies.
+- **Model**: Application of statistical and machine learning models to estimate trends and predict future scenarios.
+- **Assess**: Evaluation of model accuracy and reliability through cross-validation and analysis of results to determine public health implications.
+
+This study aims not only to understand but also to systematically document the patterns of dissemination and impact of the virus, contributing to future research and interventions in global public health.
+
+For more information and access to the dataset, visit the dataset link: [COVID-19 Data Repository](https://github.com/CSSEGISandData/COVID-19).
+
+#### Project Link
+Link: [Analysis of the Impact of COVID-19](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Analysis%20of%20the%20Impacts%20of%20COVID-19)
+
 
 
