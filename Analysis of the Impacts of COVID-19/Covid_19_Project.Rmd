@@ -1,0 +1,369 @@
+---
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Import libraries
+library(tidyverse)
+library(gridExtra)
+library(scales)
+library(mgcv)
+
+
+```
+
+<p align="center">
+  <img src="https://i0.wp.com/sanarmed.com/wp-content/uploads/2024/03/media-86.jpeg?fit=2089%2C1175&ssl=1" alt="Covid" width=300>
+</p>
+
+<h1 align='center'> <b>Analysis of the Impacts of COVID-19 on Global Populations</b> </h1>
+**Author**: Willian Botelho
+<p>
+<b>Date</b>: `r format(Sys.Date(), "%m/%d/%Y")`
+</p>
+
+
+### Introduction
+This academic project conducts an analysis of COVID-19 data, which includes daily records of confirmed cases and virus-related deaths. The data were collected and consolidated from various global sources and are essential for understanding the impacts of the pandemic, especially in countries with populations larger than that of Brazil.
+
+### Data Description
+The datasets used in this study include several key variables, such as:
+
+* **FIPS** (Federal Information Processing Standards): A code used in the United States to uniquely identify counties.
+* **Admin2**: The name of the county, applicable only in the United States.
+* **Province_State**: The name of the province or state.
+* **Country_Region**: The name of the country or region, as officially designated by the U.S. Department of State.
+* **Last Update**: The date and time of the last data update, in MM/DD/YYYY HH:mm:ss UTC format.
+* **Lat and Long_**: Geographic coordinates, with representative centroids for each location.
+* **Confirmed**: Number of confirmed and probable cases.
+* **Deaths**: Number of confirmed and probable deaths.
+
+### Study Objectives
+The primary objective of this study is to assess the impacts of COVID-19 on countries with populations larger than Brazil, using consolidated data that includes key variables for effective analysis. This work is part of the Master's in Data Science program at the University of Colorado Boulder and aims to deepen understanding of the pandemic, without intending to influence public health policies.
+
+### Data Sources
+The data for this study were extracted from the following GitHub repositories:
+
+* Daily data on confirmed cases: [COVID-19 Time Series Data - Confirmed Cases](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv)
+
+* Daily data on deaths: [COVID-19 Time Series Data - Deaths](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv)
+
+* Country population reference: [COVID-19 UID ISO FIPS LookUp Table](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv)
+
+
+### Methodology
+
+This project utilizes the SEMMA methodology to analyze COVID-19 data, focusing on the following steps:
+
+1. **Sample**: Selection of countries with populations greater than Brazil to ensure a representative demographic scale.
+2. **Explore**: Examination of data through visualizations and descriptive statistics to identify trends and anomalies.
+3. **Modify**: Data wrangling to standardize datasets for accurate analysis, including handling missing values and data inconsistencies.
+4. **Model**: Application of statistical and machine learning models to estimate trends and predict future scenarios.
+5. **Assess**: Evaluation of model accuracy and reliability through cross-validation and analysis of results to determine public health implications.
+
+This study seeks not only to understand but also to systematically document the patterns of dissemination and impact of the virus, contributing to future research and interventions in global public health.
+
+### Sample
+
+To ensure reproducibility, we will use publicly available data from the GitHub repository as previously mentioned. Additionally, the code will include detailed comments and comprehensive documentation that will describe each step of the analytical process.
+
+This ranges from data acquisition to the application of statistical methods and model configurations, including details of any data preprocessing or transformation.
+
+
+
+
+```{r loading_data, message=FALSE}
+
+# Define URLs for confirmed cases, deaths, and demographic information of countries
+confirmed_global <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+deaths_global   <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+UID_FIPS_table_url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv"
+
+# Load data from the defined URLs
+confirmed <- read_csv(confirmed_global)
+deaths <- read_csv(deaths_global)
+UID_FIPS_table <- read_csv(UID_FIPS_table_url)
+
+# Transform the confirmed data from wide to long format,
+# extracting dates and confirmed cases for each location
+confirmed <- confirmed %>%
+  pivot_longer(
+    cols = -c(`Province/State`, `Country/Region`, Lat, Long),  # Keep these columns fixed
+    names_to = "data",  # Name of the new column for dates
+    values_to = "cases"  # Name of the new column for cases
+  ) %>% mutate(data = mdy(data))  # Convert dates from month/day/year format to Date
+
+# Transform the death data from wide to long format,
+# similar to the confirmed data
+deaths <- deaths %>%
+  pivot_longer(
+    cols = -c(`Province/State`, `Country/Region`, Lat, Long),
+    names_to = "data",
+    values_to = "deaths"
+  ) %>% mutate(data = mdy(data))
+
+# Load the demographic information table
+UID_FIPS_table <- read.csv(UID_FIPS_table_url)
+
+# Extract Brazil's population using the combined key "Brazil"
+pop_brasil <- UID_FIPS_table %>%
+  filter(Combined_Key == "Brazil") %>%
+  pull(Population)  # Only extract the population value
+
+# Filter countries with a population greater than or equal to Brazil's,
+# excluding province or state records (country-level data)
+countries_larger_than_brazil <- UID_FIPS_table %>%
+  filter(Population >= pop_brasil) %>%
+  filter(is.na(Province_State) | Province_State == "") %>%
+  select(Country_Region, Population) %>%
+  rename(Countries = "Country_Region")
+
+# Perform a join of the confirmed and death data based on multiple keys
+combined_data <- confirmed %>%
+  left_join(deaths, by = c("Country/Region", "Province/State", "Lat", "Long", "data")) %>%
+  select(-`Province/State`) %>%
+  rename(Countries = "Country/Region")
+
+# Filter the combined data to only include countries with a population greater than Brazil's
+final_data <- combined_data %>%
+  filter(Countries %in% countries_larger_than_brazil$Countries)
+
+final_data <- final_data %>%
+  filter(complete.cases(final_data)) %>%
+  filter(cases > 0 & deaths > 0) %>%
+  rename(date = "data")
+
+# Display the first few lines of the final data set
+head(final_data)
+summary(final_data)
+
+```
+
+After the transformations made in the described code, we obtain a table represented by `final_data`, which contains `r dim(final_data)[1]` rows and `r dim(final_data)[2]` columns. This table includes all countries with a population greater than that of Brazil. The countries listed are **`r unique(final_data$Countries)`**.
+
+
+### Explore and Modify
+
+Let's explore the data by country to understand its characteristics and try to answer some important questions, such as:
+
+1) Are there differences in the patterns of cases and deaths among countries?
+2) Do the data show any integrity issues, such as inconsistencies or gaps?
+3) Are there indications of underreporting or absence of data during certain periods or in certain countries?
+4) How do descriptive statistics, such as mean, standard deviation, maximum, and minimum values, compare among different countries?
+
+
+```{r verify_duplicate_data_by_country, message=FALSE}
+
+# Check duplicates by country and date
+duplicates_by_country <- final_data %>%
+  group_by(Countries, date) %>%
+  summarise(Count = n(), .groups = 'drop') %>%
+  filter(Count > 1)
+
+print(unique(duplicates_by_country$Countries))
+
+```
+Data listed in the Countries column that is duplicated: **`r unique(duplicates_by_country$Countries)`**
+
+
+Let's check how duplicated this data is for the China dataset and then decide what to do.
+
+```{r filter_data_for_China, message=FALSE}
+# Filter data for China and check for duplicates by date
+duplicates_china <- final_data %>%
+  filter(Countries == "China") %>%
+  group_by(date, cases) %>%
+  summarise(Count = n(), .groups = 'drop') %>%
+  filter(Count > 1)
+
+head(duplicates_china)
+```
+
+In the dataset pertaining to China, we have observed that duplicate entries in the "date" field show different values in the "cases" column. For example, on the date 2020-02-07, there are duplicate records with varying case numbers, specifically values of 81 and 277. A similar situation occurs on the date 2020-02-20. Even if we remove one duplicate record per date, there would still be duplicates in the dataset due to variations in the reported values.
+
+To properly address this issue, it would be necessary to review the original database and identify at which stage the data integrity was compromised.
+
+However, given that our focus is educational and academic, the most practical option would be to exclude the data relating to China from the analysis. This would simplify subsequent analyses by avoiding complications arising from the inconsistencies in the data from this country.
+
+```{r filter_data_China, message=FALSE}
+
+final_data = final_data %>%
+  filter(Countries != "China")
+
+print(unique(final_data$Countries))
+```
+From now on we will only consider the following countries: **`r unique(final_data$Countries)`**.
+
+Let's plot the graphs relating to cases and deaths in these countries.
+
+```{r display_cases_deaths_plots_by_country, message=FALSE}
+# Create a plot for each country
+country_list <- unique(final_data$Countries)
+
+# Loop to create a subplot for each country
+for (country in country_list) {
+  country_data <- filter(final_data, Countries == country)
+  
+  # Create a plot for cases
+  cases_plot <- ggplot(country_data, aes(x = date, y = cases)) +
+    geom_line(color = "blue") +
+    labs(title = paste("COVID-19 Cases in", country),
+         x = "Date",
+         y = "Number of Cases") +
+    theme_minimal() + 
+    scale_y_continuous(labels = label_number(scale = 1e-6, suffix = " M"))  # Format numbers in millions
+
+  # Create a plot for deaths
+  deaths_plot <- ggplot(country_data, aes(x = date, y = deaths)) +
+    geom_line(color = "red") +
+    labs(title = paste("COVID-19 Deaths in", country),
+         x = "Date",
+         y = "Number of Deaths") +
+    theme_minimal() + 
+    scale_y_continuous(labels = label_number(scale = 1e-6, suffix = " M"))  # Format numbers in millions
+
+  # Combine the plots side by side
+  combined_plot <- grid.arrange(cases_plot, deaths_plot, ncol = 2)
+  
+  # Display the combined plot
+  invisible(combined_plot)
+}
+```
+
+Upon analyzing the data, we noticed that it exhibits similar patterns across different countries. Next, we will compare some statistical data from the countries.
+```{r summary_by_country, message=FALSE}
+
+# Group the data by country and calculate the required statistics
+summary_by_country <- final_data %>%
+  group_by(Countries) %>%
+  summarise(
+    Average_Cases = mean(cases),                     # Average number of cases
+    Average_Deaths = mean(deaths),                   # Average number of deaths
+    Std_Dev_Cases = sd(cases),                       # Standard deviation of cases
+    Std_Dev_Deaths = sd(deaths),                     # Standard deviation of deaths
+    Total_Cases = sum(cases),                        # Total number of cases
+    Total_Deaths = sum(deaths),                      # Total number of deaths
+    First_Death_Date = min(date[deaths > 0]),        # Date of the first death
+    First_Case_Date = min(date[cases > 0]),          # Date of the first case
+    Last_Death_Date = max(date[deaths > 0]),         # Date of the last death
+    Last_Case_Date = max(date[cases > 0])            # Date of the last case
+  )
+
+# Display the summary
+summary_by_country
+```
+
+Analyzing the statistical summary, we can highlight:
+
+1. **Significant Impact in the US, Brazil, and India**: These countries have the highest numbers of cases and deaths, indicating a substantial impact of the pandemic.
+2. **Marked Variability in Cases**: The US, Brazil, and India exhibit high standard deviations for both cases and deaths, reflecting significant fluctuations in daily numbers. These variations could be due to changes in public health policies, availability of testing, and virus transmission dynamics.
+3. **Consistency in Event Dates**: The first and last occurrences of cases and deaths are similar across the listed countries, showing that the pandemic reached these countries around March 2020 and remained active until at least March 2023.
+4. **Differences in Mortality Rate**: Variations in the mortality rate among countries suggest differences in healthcare systems, the effectiveness of intervention measures, testing rates, and demographic characteristics.
+
+### Model and Assess
+
+For the modeling of COVID-19 data, our goal is to predict cases and deaths for each country. To achieve this, we will adopt the following approach: when predicting the response variable "Deaths," we will use the variables "Cases" and "Date" as predictors; and when predicting the response variable "Cases," we will use the variables "Date" and "Deaths" as predictors.
+
+Initially, we conducted tests using time series models and generalized linear models. However, these models showed lower performance than expected compared to Generalized Additive Models (GAM).
+
+We chose to use GAM as an alternative approach for evaluation in this project due to its flexibility in capturing non-linear relationships in the data.
+
+For the sample selection, we initially considered all available data. However, when exploring and modifying the data, we observed that, starting from the second half of 2022, the graphs of cases and deaths show a similar behavior pattern. Both indicators tend to stabilize at lower levels along the Y-axis.
+
+Therefore, we decided to focus on analyzing this specific period, starting from the second half of 2022, to avoid potential biases and obtain more consistent results.
+
+Additional aspects related to possible biases and considerations will be addressed in the project's conclusion.
+
+```{r modeling_GAM, message=FALSE}
+
+# Filter the data for the last six months
+final_data_6months <- final_data %>%
+  filter(date >= (max(date) - months(6)))
+
+# Get the list of countries
+countries <- unique(final_data_6months$Countries)
+
+# Loop to process each country
+for (country in countries) {
+  cat("\nProcessing country:", country, "\n")
+  
+  # Filter the data for the current country
+  country_data <- final_data_6months %>%
+    filter(Countries == country) %>%
+    arrange(date)
+  
+  # Determine the split point for 80% training and 20% testing
+  split_point <- floor(0.8 * nrow(country_data))
+  
+  # Split the data into training (80%) and testing (20%) sets
+  train_indices <- country_data[1:split_point, ]
+  test_indices <- country_data[(split_point + 1):nrow(country_data), ]
+  
+  # Create a GAM model for COVID-19 cases using the training set
+  gam_cases <- gam(cases ~ c(date) + s(deaths), family = gaussian(), data = train_indices)
+  
+  # Create a GAM model for COVID-19 deaths using the training set
+  gam_deaths <- gam(deaths ~ c(date) + s(cases), family = gaussian(), data = train_indices)
+  
+  # Plot the results for cases in the test set
+  plot_cases <- ggplot(test_indices, aes(x = date)) +
+    geom_line(aes(y = cases, color = "Actual Cases")) +
+    geom_line(aes(y = predict(gam_cases, newdata = test_indices), color = "Predicted Cases")) +
+    labs(title = paste("COVID-19 Cases in", country), x = "Date", y = "Number of Cases") + 
+    scale_y_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6)) +
+    scale_color_manual(values = c("Actual Cases" = "blue", "Predicted Cases" = "red")) +
+    theme(legend.title = element_blank(), legend.position = "bottom")
+  
+  # Plot the results for deaths in the test set
+  plot_deaths <- ggplot(test_indices, aes(x = date)) +
+    geom_line(aes(y = deaths, color = "Actual Deaths")) +
+    geom_line(aes(y = predict(gam_deaths, newdata = test_indices), color = "Predicted Deaths")) +
+    labs(title = paste("COVID-19 Deaths in", country), x = "Date", y = "Number of Deaths") +
+    scale_y_continuous(labels = scales::unit_format(unit = "M", scale = 1e-6)) +
+    scale_color_manual(values = c("Actual Deaths" = "blue", "Predicted Deaths" = "red")) +
+    theme(legend.title = element_blank(), legend.position = "bottom")
+  
+  # Arrange the plots side by side
+  grid.arrange(plot_cases, plot_deaths, ncol = 2)
+  
+  # Print the summary of the cases model
+  cat("\nSummary of the cases model for", country, ":\n")
+  print(summary(gam_cases))
+  
+  # Print the summary of the deaths model
+  cat("\nSummary of the deaths model for", country, ":\n")
+  print(summary(gam_deaths))
+}
+
+
+```
+Finally, with respect to the assessment, we highlight the following aspects:
+
+##### Cases Model:
+- **Fit**: Excellent, with an extremely high adjusted R².
+- **Possible Overfitting**: The very high adjusted R² value may indicate overfitting.
+- **Smooth Terms**: Highly significant, capturing complex relationships that are not explained by linear terms alone.
+
+##### Deaths Model:
+- **Fit**: Excellent, with an adjusted R² close to 1.
+- **Smooth Terms**: Significant, reflecting complexities in the interactions between deaths and cases over time.
+
+### Conclusion
+
+Analyzing the impacts of COVID-19 remains a significant challenge even today, as the effects of the pandemic have dissipated due to vaccines and other treatments that were unknown at the time. 
+
+Specifically regarding the dataset, it is evident that the scientific community, governments, industries, and even some activists have sought to understand and predict these impacts through mathematical models during this period. However, in my research, no model has adequately captured the global variations, leading to the realization that many aspects remain unexplained and there is a need for further development in the field.
+
+It is also a fact that the COVID-19 pandemic prompted discussions in international organizations, economic forums, and other venues. It cannot be ruled out that some states may have masked the true impacts by smoothing the data or imposing restrictions on the official release of data, following protocols established by their respective health authorities. This introduces a bias that directly affects evaluations.
+
+Another aspect to consider is the distribution and access to vaccines. There was a large supply of vaccines in 2022, which may have yielded different results, or the mutation of the COVID-19 virus could have altered its characteristics, leading to milder clinical cases and fewer deaths.
+
+Additionally, the dataset has limited variables. Including more variables such as the percentage of deaths related to age, race, sex, and other characteristics could potentially improve the accuracy and significance of the models. 
+
+However, given the randomness associated with a highly contagious virus, it might not fully address the variations.
+
+In conclusion, it is essential to reflect on what COVID-19 has brought to the data community, research, and businesses. The world is indeed very different after COVID-19. The pandemic has highlighted the importance of accurate data, robust modeling, and the need for ongoing improvement in our understanding and response to global health crises.
+

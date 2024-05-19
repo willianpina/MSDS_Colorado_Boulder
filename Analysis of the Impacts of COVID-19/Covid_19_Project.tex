@@ -1,0 +1,199 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+Analysis of the Impacts of COVID-19 on Global Populations
+
+\textbf{Author}: Willian Botelho
+
+Date: 05/12/2024
+
+\subsubsection{Introduction}\label{introduction}
+
+This academic project conducts an analysis of COVID-19 data, which
+includes daily records of confirmed cases and virus-related deaths. The
+data were collected and consolidated from various global sources and are
+essential for understanding the impacts of the pandemic, especially in
+countries with populations larger than that of Brazil.
+
+\subsubsection{Data Description}\label{data-description}
+
+The datasets used in this study include several key variables, such as:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{FIPS} (Federal Information Processing Standards): A code used
+  in the United States to uniquely identify counties.
+\item
+  \textbf{Admin2}: The name of the county, applicable only in the United
+  States.
+\item
+  \textbf{Province\_State}: The name of the province or state.
+\item
+  \textbf{Country\_Region}: The name of the country or region, as
+  officially designated by the U.S. Department of State.
+\item
+  \textbf{Last Update}: The date and time of the last data update, in
+  MM/DD/YYYY HH:mm:ss UTC format.
+\item
+  \textbf{Lat and Long\_}: Geographic coordinates, with representative
+  centroids for each location.
+\item
+  \textbf{Confirmed}: Number of confirmed and probable cases.
+\item
+  \textbf{Deaths}: Number of confirmed and probable deaths.
+\end{itemize}
+
+\subsubsection{Study Objectives}\label{study-objectives}
+
+The primary objective of this study is to assess the impacts of COVID-19
+on countries with populations larger than Brazil, using consolidated
+data that includes key variables for effective analysis. This work is
+part of the Master's in Data Science program at the University of
+Colorado Boulder and aims to deepen understanding of the pandemic,
+without intending to influence public health policies.
+
+\subsubsection{Data Sources}\label{data-sources}
+
+The data for this study were extracted from the following GitHub
+repositories:
+
+\begin{itemize}
+\item
+  Daily data on confirmed cases:
+  \href{https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv}{COVID-19
+  Time Series Data - Confirmed Cases}
+\item
+  Daily data on deaths:
+  \href{https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv}{COVID-19
+  Time Series Data - Deaths}
+\item
+  Country population reference:
+  \href{https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv}{COVID-19
+  UID ISO FIPS LookUp Table}
+\end{itemize}
+
+This study seeks not only to understand but also to systematically
+document the patterns of dissemination and impact of the virus,
+contributing to future research and interventions in global public
+health.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{general\_url }\OtherTok{=} \StringTok{"https://github.com/CSSEGISandData/COVID{-}19/tree/master/csse\_covid\_19\_data/csse\_covid\_19\_time\_series/"}
+\NormalTok{confirmed\_global }\OtherTok{=} \StringTok{"time\_series\_covid19\_confirmed\_global.csv"}
+\NormalTok{deaths\_global   }\OtherTok{=} \StringTok{"time\_series\_covid19\_deaths\_global.csv"}
+\NormalTok{UID\_FIPS\_table }\OtherTok{=} \StringTok{"https://github.com/CSSEGISandData/COVID{-}19/blob/master/csse\_covid\_19\_data/UID\_ISO\_FIPS\_LookUp\_Table.csv"}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
