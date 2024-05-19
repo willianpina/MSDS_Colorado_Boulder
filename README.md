@@ -276,3 +276,7 @@ Link: [New York City Shooting Incident Data Analysis](https://github.com/willian
 
 ---
 
+### 9. Analysis of the Impacts of COVID-19 on Global Populations
+
+
+
