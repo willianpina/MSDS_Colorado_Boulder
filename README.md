@@ -332,5 +332,68 @@ For more information and access to the dataset, visit the dataset link: [COVID-1
 #### Project Link
 Link: [Analysis of the Impact of COVID-19](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Analysis%20of%20the%20Impacts%20of%20COVID-19)
 
+Aqui está a versão atualizada da descrição para o seu projeto no GitHub, agora incluindo o link do projeto no Hugging Face:
 
+---
+
+## 10. Analysis of Data Scientist Job Market in the UK (2024)
+
+### Introduction
+This academic project delves into the data science job market in the United Kingdom, focusing on key trends such as salary variation, required skills, and the influence of company ratings on job attractiveness. The dataset, sourced from Glassdoor, provides detailed information on job listings, including company names, job titles, salary ranges, and required skills. This project is part of the Master's in Data Science curriculum and is aligned with the objectives of exploring the trends in demand for data scientists, both regionally and skill-wise. The findings will be presented as part of the course's final project evaluation.
+
+### Repository Structure
+The repository is divided into distinct sections to enable a clear understanding of the project and its objectives:
+
+- **About the Dataset and Project**: This section provides a thorough description of the dataset, including its origin, key attributes, and maintenance.
+- **Dataset Description**: Explores the metadata to clarify the variables available for analysis, such as company ratings, job locations, salary ranges, and required skills.
+- **Data Cleaning and Organization**: Details the processes of importing, cleaning, and organizing the dataset, including how missing values and data inconsistencies were addressed.
+- **Visualizations and Analysis**: Displays a variety of visualizations and analyses that answer the key project questions, focusing on salary trends, skill requirements, and company ratings.
+  
+### Contribution and Collaboration
+Contributions from the data science community are highly encouraged. Data scientists, HR professionals, and students are welcome to fork the repository, open issues, and submit pull requests to improve the project's insights. Collaboration is highly appreciated to enhance the understanding of the evolving data science job market in the UK.
+
+### Objectives
+This project focuses on the following main objectives:
+
+1. **Analyze Salary Variation**: Understand how salaries for data science roles vary across different cities and regions in the UK.
+2. **Identify In-Demand Skills**: Discover the most sought-after skills for data scientists and their impact on salaries.
+3. **Assess Company Ratings and Remote Opportunities**: Explore whether highly-rated companies offer higher salaries or more opportunities for remote work.
+
+### Future Prospects
+This project lays a strong foundation for future analysis of the data science job market, particularly as it evolves post-pandemic. The visualizations and insights could serve as a valuable resource for job seekers and employers alike. Future enhancements could involve expanding the dataset to include international job markets and further refining the predictive models for salary trends and skill demand.
+
+### Data Description
+The dataset used in this project contains several key variables, such as:
+
+- **Company**: The name of the company offering the job position.
+- **Company Score**: The rating given to the company by employees.
+- **Job Title**: The specific job role being advertised.
+- **Date**: The date the job listing was posted.
+- **Salary**: The estimated salary range for the position.
+- **Skills**: A list of required skills for the job role.
+- **Estimation Type**: Indicates whether the salary was estimated by the company or the job listing platform.
+- **Remote**: Specifies whether the job is remote or on-site.
+- **City** and **Country**: The location of the job.
+
+### Data Sources
+The data for this study were extracted from the following source:
+
+- [Data Scientist Job Roles in the UK Dataset](https://www.kaggle.com/datasets/emreksz/datascientistjobrolesinuk)
+
+### Methodology
+This project follows a structured methodology to analyze the UK job market for data scientists:
+
+1. **Sample**: Selection of job listings specific to the UK to reflect regional trends and market conditions.
+2. **Explore**: Utilize descriptive statistics and visualizations to identify trends in salary, skills, and company ratings.
+3. **Modify**: Clean and preprocess the dataset to ensure accurate and reliable analysis, including addressing missing values and formatting inconsistencies.
+4. **Model**: Implement data visualizations and predictive analyses to forecast salary trends and demand for specific skills.
+5. **Assess**: Evaluate the visualizations through user feedback and refinement to ensure clarity and usability.
+
+This analysis aims to provide a comprehensive view of the job market for data scientists in the UK, guiding career planning and recruitment strategies.
+
+### Project Links
+- [Analysis of Data Scientist Job Market in the UK - GitHub](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Data%20Scientist%20Job%20Market%20UK)
+- [Interactive App on Hugging Face](https://huggingface.co/spaces/willianpina/trends-and-salaries)
+
+---
 
