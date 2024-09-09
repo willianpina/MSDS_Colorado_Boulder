@@ -6,19 +6,19 @@ from wordcloud import WordCloud
 import base64
 import io
 
-# Carregar os dados
+# Load the data
 path = 'data/Cleaned_Dataset.csv'
 data = pd.read_csv(path)
 data_corr = data.dropna(subset=['Salary', 'City', 'Country'])
 
-# Configuração da página
+# Page configuration
 st.set_page_config(page_title="Opportunities for Data Scientists in the UK", layout="wide")
 
-# URL da imagem e link do Kaggle
+# Image URL and Kaggle link
 source = "https://th.bing.com/th/id/OIP.zWLJ_uRbBRHelY8p_ZkWJQHaBH?rs=1&pid=ImgDetMain"
 kaggle_link = "https://www.kaggle.com/datasets/emreksz/data-scientist-job-roles-in-uk"
 
-# Adicionar ícone do GitHub no canto superior direito
+# Add GitHub icon in the top-right corner
 st.markdown(
     """
     <style>
@@ -28,14 +28,14 @@ st.markdown(
         right: 10px;
         z-index: 1000;  
     </style>
-    <a href="https://github.com/willianpina" target="_blank" class="github">
+    <a href="https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Fundamentals%20of%20Visualization%20for%20Data%20Science" target="_blank" class="github">
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="50" height="50">
     </a>
     """,
     unsafe_allow_html=True
 )
 
-# Cabeçalho e informações do projeto
+# Header and project information
 st.markdown(
     """
     <div style="background-color: white; padding: 10px 0; text-align: center;">
@@ -59,7 +59,7 @@ st.markdown(
     """
 )
 
-# Seção de análise de distribuição salarial
+# Salary distribution analysis section
 st.header('1. Salary Distribution Analysis')
 col1, col2 = st.columns(2)
 
@@ -73,10 +73,10 @@ with col2:
     fig_country = px.box(data_corr, x='Country', y='Salary')
     st.plotly_chart(fig_country, use_container_width=True)
 
-# Filtros de País e Cidade
+# Country and City filters
 st.header('2. Most In-Demand Skills for Data Scientists')
 
-# Adicionar opção "All" para seleção de País e Cidade
+# Add "All" option for Country and City selection
 selected_country = st.selectbox('Filter by Country:', options=['All'] + list(data_corr['Country'].unique()), index=0)
 if selected_country != 'All':
     cities = ['All'] + list(data_corr[data_corr['Country'] == selected_country]['City'].unique())
@@ -85,7 +85,7 @@ else:
 
 selected_city = st.selectbox('Filter by City:', options=cities, index=0)
 
-# Gerar gráfico de dispersão baseado nos filtros
+# Generate scatter plot based on filters
 filtered_data = data.copy()
 
 if selected_country != 'All':
@@ -98,7 +98,7 @@ st.header('3. Correlation between Company Score and Salary')
 scatter_fig = px.scatter(filtered_data, x='Company Score', y='Salary', color='Remote', symbol='Remote')
 st.plotly_chart(scatter_fig, use_container_width=True)
 
-# Nuvem de Palavras (WordCloud)
+# WordCloud (Most In-Demand Skills)
 st.header('4. Most In-Demand Skills')
 skills_list = data_corr['Skills'].dropna().str.split(', ')
 all_skills = [skill for sublist in skills_list for skill in sublist]
@@ -116,5 +116,3 @@ if skill_counts:
     )
 else:
     st.text("No skills data available.")
-
-
