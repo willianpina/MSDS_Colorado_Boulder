@@ -28,7 +28,7 @@ st.markdown(
         right: 10px;
         z-index: 1000;  
     </style>
-    <a href="https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Fundamentals%20of%20Visualization%20for%20Data%20Science" target="_blank" class="github">
+    <a href="https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Data%20Scientist%20Job%20Market%20UK" target="_blank" class="github">
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="50" height="50">
     </a>
     """,
