@@ -1,0 +1,10 @@
+tensorflow==2.15.0
+tf-keras
+ktrain
+gdown
+pandas
+matplotlib
+scikit-learn
+numpy
+ipython
+notebook
