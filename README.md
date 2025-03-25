@@ -332,16 +332,14 @@ For more information and access to the dataset, visit the dataset link: [COVID-1
 #### Project Link
 Link: [Analysis of the Impact of COVID-19](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Analysis%20of%20the%20Impacts%20of%20COVID-19)
 
-Aqui está a versão atualizada da descrição para o seu projeto no GitHub, agora incluindo o link do projeto no Hugging Face:
-
 ---
 
-## 10. Analysis of Data Scientist Job Market in the UK (2024)
+### 10. Analysis of Data Scientist Job Market in the UK (2024)
 
-### Introduction
+#### Introduction
 This academic project delves into the data science job market in the United Kingdom, focusing on key trends such as salary variation, required skills, and the influence of company ratings on job attractiveness. The dataset, sourced from Glassdoor, provides detailed information on job listings, including company names, job titles, salary ranges, and required skills. This project is part of the Master's in Data Science curriculum and is aligned with the objectives of exploring the trends in demand for data scientists, both regionally and skill-wise. The findings will be presented as part of the course's final project evaluation.
 
-### Repository Structure
+#### Repository Structure
 The repository is divided into distinct sections to enable a clear understanding of the project and its objectives:
 
 - **About the Dataset and Project**: This section provides a thorough description of the dataset, including its origin, key attributes, and maintenance.
@@ -349,20 +347,20 @@ The repository is divided into distinct sections to enable a clear understanding
 - **Data Cleaning and Organization**: Details the processes of importing, cleaning, and organizing the dataset, including how missing values and data inconsistencies were addressed.
 - **Visualizations and Analysis**: Displays a variety of visualizations and analyses that answer the key project questions, focusing on salary trends, skill requirements, and company ratings.
   
-### Contribution and Collaboration
+#### Contribution and Collaboration
 Contributions from the data science community are highly encouraged. Data scientists, HR professionals, and students are welcome to fork the repository, open issues, and submit pull requests to improve the project's insights. Collaboration is highly appreciated to enhance the understanding of the evolving data science job market in the UK.
 
-### Objectives
+#### Objectives
 This project focuses on the following main objectives:
 
 1. **Analyze Salary Variation**: Understand how salaries for data science roles vary across different cities and regions in the UK.
 2. **Identify In-Demand Skills**: Discover the most sought-after skills for data scientists and their impact on salaries.
 3. **Assess Company Ratings and Remote Opportunities**: Explore whether highly-rated companies offer higher salaries or more opportunities for remote work.
 
-### Future Prospects
+#### Future Prospects
 This project lays a strong foundation for future analysis of the data science job market, particularly as it evolves post-pandemic. The visualizations and insights could serve as a valuable resource for job seekers and employers alike. Future enhancements could involve expanding the dataset to include international job markets and further refining the predictive models for salary trends and skill demand.
 
-### Data Description
+#### Data Description
 The dataset used in this project contains several key variables, such as:
 
 - **Company**: The name of the company offering the job position.
@@ -375,12 +373,12 @@ The dataset used in this project contains several key variables, such as:
 - **Remote**: Specifies whether the job is remote or on-site.
 - **City** and **Country**: The location of the job.
 
-### Data Sources
+#### Data Sources
 The data for this study were extracted from the following source:
 
 - [Data Scientist Job Roles in the UK Dataset](https://www.kaggle.com/datasets/emreksz/datascientistjobrolesinuk)
 
-### Methodology
+#### Methodology
 This project follows a structured methodology to analyze the UK job market for data scientists:
 
 1. **Sample**: Selection of job listings specific to the UK to reflect regional trends and market conditions.
@@ -391,9 +389,74 @@ This project follows a structured methodology to analyze the UK job market for d
 
 This analysis aims to provide a comprehensive view of the job market for data scientists in the UK, guiding career planning and recruitment strategies.
 
-### Project Links
+#### Project Links
 - [Analysis of Data Scientist Job Market in the UK - GitHub](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Data%20Scientist%20Job%20Market%20UK)
 - [Interactive App on Hugging Face](https://huggingface.co/spaces/willianpina/trends-and-salaries)
 
 ---
+### 11. Predictive Analysis of Supervised Text Classification for Marketing Analytics  
+
+#### Introduction  
+Contextual advertising is an essential component of digital marketing, enabling brands to place their ads in environments that align with their target audience’s interests. In this project, we build a deep learning model capable of identifying news articles that mention **health and wellness**, which can be used by brands like **Theragun** to optimize their media buying strategies.  
+
+By leveraging supervised learning techniques, we aim to create an algorithm that can effectively classify headlines, making it possible to identify relevant content across the web and maximize the efficiency of contextual advertising efforts.  
+
+#### Objective  
+Our analysis revolves around the use of the HuffPost headlines dataset and focuses on two critical paths:  
+
+- **Classification Analysis**: Predicting whether a news headline is related to health and wellness content (combining the categories *Healthy Living* and *Wellness*), using supervised deep learning models.  
+
+By processing and analyzing this rich dataset, we aim to generate insights and deliver an accurate model that supports marketing decisions, allowing brands to find the right context for their advertisements.  
+
+#### Collaboration  
+We welcome marketers, data scientists, machine learning enthusiasts, and digital strategists to collaborate and enrich this project. Through collaboration, we can improve contextual advertising strategies and build stronger machine learning models.  
+
+#### Contribution  
+Feel free to fork the repository, open issues, and submit pull requests. Your contributions will be duly acknowledged, and we look forward to building a valuable tool for contextual advertising together.  
+
+#### The Data  
+This dataset was originally made available by **Rishabh Misra**, containing around **200,000 news headlines** published by **HuffPost** between 2012 and 2018. Each headline is classified into categories such as:  
+
+- POLITICS  
+- WELLNESS  
+- ENTERTAINMENT  
+- TRAVEL  
+- STYLE & BEAUTY  
+- PARENTING  
+- HEALTHY LIVING  
+- FOOD & DRINK  
+- BUSINESS  
+- SPORTS  
+- SCIENCE  
+- and others.  
+
+Our task focused on building a binary classifier to predict whether a headline relates to **health and wellness** content.  
+
+#### Dr. Vargo's Benchmarks  
+The benchmark provided by Dr. Vargo for this challenge was:  
+
+| Metric        | Precision | Recall | F1-Score |
+|---------------|-----------|--------|----------|
+| Class 0       | 0.88      | 0.84   | 0.86     |
+| Class 1       | 0.85      | 0.89   | 0.87     |
+| **Accuracy**  |           |        | **0.86** |
+| **Macro Avg** | 0.86      | 0.86   | 0.86     |
+| **Weighted Avg** | 0.86   | 0.86   | 0.86     |
+
+#### My Results  
+After model training and optimization, the final evaluation metrics were:  
+
+| Category        | Precision | Recall | F1-Score | Support |
+|-----------------|-----------|--------|----------|---------|
+| Healthy Living  | 0.80      | 0.62   | 0.70     | 1,375   |
+| Wellness        | 0.86      | 0.94   | 0.90     | 3,530   |
+| **Accuracy**    |           |        | **0.85** | 4,905   |
+| **Macro Avg**   | 0.83      | 0.78   | 0.80     | 4,905   |
+| **Weighted Avg**| 0.85      | 0.85   | 0.84     | 4,905   |
+
+The results demonstrate a strong ability to detect **wellness-related** headlines with high recall and precision. There is room for improvement in **healthy living** detection, especially increasing recall through further data tuning or augmentation.  
+
+### Project Link  
+Link: [Supervised Text Classification for Marketing Analytics](https://github.com/willianpina/MSDS_Colorado_Boulder/tree/main/Supervised%20Text%20Classification%20for%20Marketing%20Analytics)
+
 
