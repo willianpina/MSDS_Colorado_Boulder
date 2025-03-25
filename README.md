@@ -1,4 +1,4 @@
-<img src= https://www.colorado.edu/brand/sites/default/files/styles/medium/public/page/boulder-one-line-reverse.png width=1000></img>
+<img src= 'https://images.ctfassets.net/mrbo2ykgx5lt/40632/e56bbd25a0e2d85901868cf1a45ccc3e/1200x675px-cu-boulder.jpg?&w=1056&fm=jpg' width=1000></img>
 
 ---
 
